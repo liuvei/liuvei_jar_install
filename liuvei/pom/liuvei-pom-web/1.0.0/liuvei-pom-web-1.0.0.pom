@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>liuvei-pom-app</artifactId>
+        <groupId>com.liuvei.pom</groupId>
+        <version>1.0.0</version>
+        <relativePath>../liuvei-pom-app/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>liuvei-pom-web</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>liuvei-pom-web-ssj</module>
+    </modules>
+
+
+    <!-- 2A. 直接使用的依赖-->
+    <dependencies>
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1001. [javaee31][jar] -->
+        <!-- ********************************************************************** -->
+        <!-- 1) servlet-api和jsp-api的jar包，容器中已有; -->
+        <!-- scope为provided可避免打包时复制到lib目录； -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
+
+        <!-- 2) jstl和taglibs的jar包，容器中没有； -->
+        <!-- scope默认为compile，打包时会复制到lib目录； -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1011. [log][jar]  -->
+        <!-- ********************************************************************** -->
+        <!-- part a1: log.framework.jcl -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${log.framework.jcl.version}</version>
+        </dependency>
+
+        <!-- part a2: log.framework.slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${log.framework.slf4j.version}</version>
+        </dependency>
+
+        <!-- part b1: log.system.log4j, need log4j.properties -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log.system.log4j.version}</version>
+        </dependency>
+
+        <!-- part b2: log.system.log4j2, need log4j2.xml -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log.system.log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log.system.log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${log.system.log4j2.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log.system.log4j2.version}</version>
+        </dependency>
+         -->
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1021. [jdbc-mysql][jar]  -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${jdbc.mysql.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1031. [ds-dbcp2][jar] -->
+        <!-- ********************************************************************** -->
+        <!-- 数据库连接池： dbcp2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>${ds.dbcp2.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1032. [ds-c3p0][jar] -->
+        <!-- ********************************************************************** -->
+        <!-- 数据库连接池： c3p0 v2 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${ds.c3p0.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1033. [ds-druid][jar] -->
+        <!-- ********************************************************************** -->
+        <!-- 数据库连接池：阿里的 druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${ds.druid.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1041. [dbutils][jar] -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <version>${apache.dbutils.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1042. [fileupload][jar] -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${apache.fileupload.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1043. [httpmime][jar] -->
+        <!-- ********************************************************************** -->
+        <!-- httpmime ==》httpclient ==》httpcore/commons-codec-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${apache.httpmime.version}</version>
+        </dependency>
+
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1051. [jackson][jar] -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${json.jackson.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1052. [gson][jar] -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${json.gson.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+
+        <!-- ********************************************************************** -->
+        <!-- ***** 1053. [fastjson][jar] -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${json.fastjson.version}</version>
+        </dependency>
+        <!-- ********************************************************************** -->
+
+
+
+
+
+
+    </dependencies>
+
+    <!-- 2B. 子模块使用的依赖-->
+    <dependencyManagement>
+        <dependencies>
+
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <!-- 3A. 直接使用的插件-->
+        <plugins>
+
+            <!-- ***** 0100. [war empty][plugin] -->
+            <!-- ********************************************************************** -->
+            <!-- web空处理——空目录处理和无web.xml处理 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 0110. [jetty run web app][plugin] -->
+            <!-- ********************************************************************** -->
+            <!-- 说明1：默认端口号为9090（可自行修改） -->
+            <!-- 说明1：默认上下文目录 是项目的artifactId（也可自行修改） -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+            </plugin>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 0120. [deployprj to tomcat7][plugin] -->
+            <!-- ********************************************************************** -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+            </plugin>
+            <!-- ********************************************************************** -->
+        </plugins>
+
+        <!-- 3B. 子模块继承的插件-->
+        <pluginManagement>
+            <plugins>
+
+
+            </plugins>
+        </pluginManagement>
+
+    </build>
+
+</project>

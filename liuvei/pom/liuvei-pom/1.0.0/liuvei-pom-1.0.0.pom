@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.liuvei.pom</groupId>
+    <artifactId>liuvei-pom</artifactId>
+    <version>1.0.0</version>
+    <modules>
+        <module>liuvei-pom-app</module>
+        <module>liuvei-pom-web</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <!-- 1. 预定义的props键值对-->
+    <properties>
+        <!-- ***** PartA. version -->
+        <version.0>1.0-SNAPSHOT0</version.0>
+        <version.1>1.0.0</version.1>
+        <version.2>2.0.0</version.2>
+        <version.3>3.0.0</version.3>
+        <version.4>4.0.0</version.4>
+        <version.5>5.0.0</version.5>
+        <version.6>6.0.0</version.6>
+        <version.7>7.0.0</version.7>
+        <version.8>8.0.0</version.8>
+        <version.9>9.0.0</version.9>
+        <!-- ***** PartB. internal.repo -->
+        <!-- 请务必在Maven的settings.xml配置文件中，配置internal.repo.id对应的服务器名称和账密， -->
+        <!--    settings.xml配置的服务器的账密必须在maven私服中可用。 -->
+        <internal.repo.id>internal-super</internal.repo.id>
+        <!-- 请务必在hosts中配置internal的对应IP，win下可使用SwitchHosts工具软件配置。 -->
+        <internal.repo.release.url>http://internal:9980/repository/internal-release/</internal.repo.release.url>
+        <internal.repo.snapshot.url>http://internal:9980/repository/internal-snapshot/</internal.repo.snapshot.url>
+
+        <!-- ***** 0000.[clean plugin][props] -->
+        <maven.clean.plugin.version>3.1.0</maven.clean.plugin.version>
+
+        <!-- ***** 0001.[resource plugin][props] -->
+        <maven.resource.plugin.version>3.1.0</maven.resource.plugin.version>
+        <maven.resource.plugin.encoding>UTF-8</maven.resource.plugin.encoding>
+
+        <!-- ***** 0002.[compile plugin][props] -->
+        <java.version>1.8</java.version>
+        <jdk.source.version>1.8</jdk.source.version>
+        <jdk.target.version>1.8</jdk.target.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.arguments.extdirs>lib/</maven.compiler.arguments.extdirs>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- ***** 0003.[surefire plugin][props] -->
+        <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
+
+        <!-- ***** 0004.[jar plugin][props] -->
+        <maven.jar.plugin.version>3.1.2</maven.jar.plugin.version>
+
+        <!-- ***** 0005.[install plugin][props] -->
+        <maven.install.plugin.version>2.5.2</maven.install.plugin.version>
+
+        <!-- ***** 0006.[deploy plugin][props] -->
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+
+        <!-- ***** 0007.[site plugin][props] -->
+        <maven.site.plugin.version>3.7.1</maven.site.plugin.version>
+
+        <!-- ***** 0008.[projectinfo plugin][props] -->
+        <maven.projectinfo.plugin.version>3.0.0</maven.projectinfo.plugin.version>
+
+        <!-- ***** 0009.[source plugin][props] -->
+        <maven.source.plugin.version>3.1.0</maven.source.plugin.version>
+
+        <!-- ***** 0010.[javadoc plugin][props] -->
+        <maven.javadoc.plugin.version>3.1.0</maven.javadoc.plugin.version>
+        <maven.javadoc.plugin.charset>UTF-8</maven.javadoc.plugin.charset>
+        <maven.javadoc.plugin.encoding>UTF-8</maven.javadoc.plugin.encoding>
+        <maven.javadoc.plugin.docencoding>UTF-8</maven.javadoc.plugin.docencoding>
+        <maven.javadoc.plugin.nohelp>true</maven.javadoc.plugin.nohelp>
+        <maven.javadoc.plugin.show>private</maven.javadoc.plugin.show>
+
+        <!-- ***** 0011.[assembly plugin][props] -->
+        <maven.assembly.plugin.version>3.1.1</maven.assembly.plugin.version>
+        <maven.assembly.plugin.version.2.6>2.6</maven.assembly.plugin.version.2.6>
+        <maven.assembly.plugin.main.class>edu.entry.Start</maven.assembly.plugin.main.class>
+
+
+        <!-- ***** 0100. [war empty][props] -->
+        <maven.war.plugin.version>3.2.0</maven.war.plugin.version>
+
+        <!-- ***** 0110.[jetty run web app][props]  [9.4.14.v20181114] -->
+        <maven.jetty.plugin.version>9.4.19.v20190610</maven.jetty.plugin.version>
+        <maven.jetty.plugin.port>9090</maven.jetty.plugin.port>
+
+        <!-- ***** 0120.[deployprj to tomcat7][props]  [2.2] -->
+        <maven.tomcat7.plugin.version>2.2</maven.tomcat7.plugin.version>
+        <maven.tomcat7.plugin.server>R1_tomcat_v85_8080</maven.tomcat7.plugin.server>
+        <maven.tomcat7.plugin.url>http://tomcat8080:8080/manager/text</maven.tomcat7.plugin.url>
+
+        <!-- ***** 1000.[unit test][props] -->
+        <junit.version>4.12</junit.version>
+
+        <!-- ***** 1001.[javaee31][props] -->
+        <javaee31.servletapi.version>3.1.0</javaee31.servletapi.version>
+        <javaee31.jspapi.version>2.2</javaee31.jspapi.version>
+        <javaee31.jstl.version>1.2</javaee31.jstl.version>
+        <javaee31.taglibs.version>1.1.2</javaee31.taglibs.version>
+
+        <!-- ***** 1011. [log][props] -->
+        <log.framework.jcl.version>1.2</log.framework.jcl.version>
+        <log.framework.slf4j.version>1.7.26</log.framework.slf4j.version>
+        <log.system.log4j.version>1.2.17</log.system.log4j.version>
+        <log.system.log4j2.version>2.11.2</log.system.log4j2.version>
+
+        <!-- ***** 1021. [jdbc-mysql][props] -->
+        <jdbc.mysql.version>5.1.47</jdbc.mysql.version>
+
+        <!-- ***** 1031. [ds-dbcp2][props] -->
+        <ds.dbcp2.version>2.5.0</ds.dbcp2.version>
+
+        <!-- ***** 1032. [ds-c3p0][props] -->
+        <ds.c3p0.version>0.9.5.2</ds.c3p0.version>
+
+        <!-- ***** 1033. [ds-druid][props] -->
+        <ds.druid.version>1.1.14</ds.druid.version>
+
+        <!-- ***** 1041. [dbutils][props] -->
+        <apache.dbutils.version>1.7</apache.dbutils.version>
+
+        <!-- ***** 1042. [fileupload][props] -->
+        <apache.fileupload.version>1.4</apache.fileupload.version>
+
+        <!-- ***** 1043. [httpmime][props] -->
+        <apache.httpmime.version>4.5.8</apache.httpmime.version>
+
+        <!-- ***** 1051. [jackson][props] -->
+        <json.jackson.version>2.10.0</json.jackson.version>
+
+        <!-- ***** 1052. [gson][props] -->
+        <json.gson.version>2.8.5</json.gson.version>
+
+        <!-- ***** 1053. [fastjson][props] -->
+        <json.fastjson.version>1.2.56</json.fastjson.version>
+
+        <!-- ***** 1101. [joda time][props] -->
+        <joda.time.version>2.10.2</joda.time.version>
+
+        <!-- ***** 1110. [zxing][props] -->
+        <google.zxing.version>3.3.3</google.zxing.version>
+
+        <!-- ***** 2000. [spring app][props] -->
+        <spring.app.version>5.2.0.RELEASE</spring.app.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <asm.version>5.2</asm.version>
+        <cglib.version>3.2.10</cglib.version>
+
+        <!--***** 2001. [mybatis][props] -->
+        <mybatis.core.version>3.5.0</mybatis.core.version>
+        <mybatis.spring.version>2.0.0</mybatis.spring.version>
+        <mybatis.pagehelper.version>5.1.10</mybatis.pagehelper.version>
+        <mybatis.generator.version>1.3.7</mybatis.generator.version>
+
+        <!--***** 2002. [hibernate][props] -->
+        <hibernate.core.version>5.4.1.Final</hibernate.core.version>
+        <hibernate.jpa.version>1.0.2.Final</hibernate.jpa.version>
+
+        <!--***** 2003. [struts][props] -->
+        <struts.core.version>2.5.20</struts.core.version>
+
+        <!--***** 3000. [third liuvei common][props] -->
+        <liuvei.common.version>1.0.0</liuvei.common.version>
+
+        <!--***** 4000. [jedis][props] -->
+        <jedis.version>2.10.2</jedis.version>
+        <!-- <jedis.version>3.0.1</jedis.version> -->
+        <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
+
+    </properties>
+
+
+    <!-- 2A. 直接使用的依赖-->
+    <dependencies>
+
+    </dependencies>
+
+    <!-- 2B. 子模块使用的依赖-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- ********************************************************************** -->
+            <!-- ***** 1000.[unit test][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1001. [javaee31][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- 1) servlet-api和jsp-api的jar包，容器中已有; -->
+            <!-- scope为provided可避免打包时复制到lib目录； -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javaee31.servletapi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${javaee31.jspapi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- 2) jstl和taglibs的jar包，容器中没有； -->
+            <!-- scope默认为compile，打包时会复制到lib目录； -->
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${javaee31.jstl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>${javaee31.taglibs.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1011. [log][jar]  -->
+            <!-- ********************************************************************** -->
+            <!-- part a1: log.framework.jcl -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${log.framework.jcl.version}</version>
+            </dependency>
+
+            <!-- part a2: log.framework.slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${log.framework.slf4j.version}</version>
+            </dependency>
+
+            <!-- part b1: log.system.log4j, need log4j.properties -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log.system.log4j.version}</version>
+            </dependency>
+
+            <!-- part b2: log.system.log4j2, need log4j2.xml -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log.system.log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log.system.log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>${log.system.log4j2.version}</version>
+            </dependency>
+            <!--
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log.system.log4j2.version}</version>
+            </dependency>
+             -->
+            <!-- ********************************************************************** -->
+
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1021. [jdbc-mysql][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${jdbc.mysql.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1031. [ds-dbcp2][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- 数据库连接池： dbcp2 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>${ds.dbcp2.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1032. [ds-c3p0][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- 数据库连接池： c3p0 v2 -->
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${ds.c3p0.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1033. [ds-druid][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- 数据库连接池：阿里的 druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${ds.druid.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1041. [dbutils][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>${apache.dbutils.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1042. [fileupload][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${apache.fileupload.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1043. [httpmime][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- httpmime ==》httpclient ==》httpcore/commons-codec-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${apache.httpmime.version}</version>
+            </dependency>
+
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1051. [jackson][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${json.jackson.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1052. [gson][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${json.gson.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1053. [fastjson][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${json.fastjson.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1101. [joda time][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.time.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 1110. [zxing][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${google.zxing.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 2000. [spring app][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- part a1 : spring app -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+
+            <!-- part b1 : spring app rel -->
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>${aopalliance.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${asm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+            <!-- part a2 : spring mvc -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.app.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!--***** 2001. [mybatis][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis.generator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+
+            <!-- ********************************************************************** -->
+            <!--***** 2002. [hibernate][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${hibernate.jpa.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 2003. [struts][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- part a1 : struts2 core -->
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-core</artifactId>
+                <version>${struts.core.version}</version>
+            </dependency>
+
+            <!-- part a2 : struts2 rel -->
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm-tree</artifactId>
+                <version>${asm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm-commons</artifactId>
+                <version>${asm.version}</version>
+            </dependency>
+            <!-- part a3 : struts2-spring-plugin -->
+            <!--
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-spring-plugin</artifactId>
+                <version>${struts.core.version}</version>
+            </dependency>
+            -->
+            <!-- ********************************************************************** -->
+
+
+
+            <!-- ********************************************************************** -->
+            <!-- ***** 3000. [third liuvei common][jar] -->
+            <!-- ********************************************************************** -->
+            <!-- 说明1：本jar包是第三方包，需要先以命令行形式安装在本地仓库； -->
+            <!-- 说明2：如使私服，且已在私服部署本包，则直接依赖即可。 -->
+            <!--
+                mvn install:install-file -Dfile=D:\liuvei-common-1.0.0.jar -DgroupId=com.liuvei.common -DartifactId=liuvei-common -Dversion=1.0.0 -Dpackaging=jar -DgeneratePom=true
+            -->
+
+            <dependency>
+                <groupId>com.liuvei.common</groupId>
+                <artifactId>liuvei-common</artifactId>
+                <version>${liuvei.common.version}</version>
+            </dependency>
+
+            <!-- ********************************************************************** -->
+
+            <!-- ********************************************************************** -->
+            <!--***** 4000. [jedis][jar] -->
+            <!-- ********************************************************************** -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
+            <!-- ********************************************************************** -->
+
+
+        </dependencies>
+
+
+    </dependencyManagement>
+
+
+    <build>
+        <!-- 3A. 直接使用的插件-->
+        <plugins>
+
+
+        </plugins>
+
+        <!-- 3B. 子模块继承的插件-->
+        <pluginManagement>
+
+            <plugins>
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0000.[clean plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven.clean.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0001.[resource plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- 空资源处理 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resource.plugin.version}</version>
+                    <configuration>
+                        <encoding>${maven.resource.plugin.encoding}</encoding>
+                        <includeEmptyDirs>true</includeEmptyDirs>
+                    </configuration>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0002.[compile plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- 0. maven运行的时候都是依赖于插件 -->
+                <!-- maven编译插件是org.apache.maven.plugins(该插件来自本地仓库); -->
+                <!-- 配置maven编译时的jdk版本和编码，不配置编码则cli下mvn编译会提示错误。 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <!-- 使用本地jar包 -->
+                        <compilerArguments>
+                            <extdirs>${maven.compiler.arguments.extdirs}</extdirs>
+                        </compilerArguments>
+                    </configuration>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0003.[surefire plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- 测试 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                    <configuration>
+                        <forkMode>once</forkMode>
+                        <!-- IDE控制台输出乱码处理：指定编码方式  -->
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                    </configuration>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0004.[jar plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- Eclipse暂不支持 -->
+                <!--
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.plugin.version}</version>
+                </plugin>
+                 -->
+                <!-- ********************************************************************** -->
+
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0005.[install plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven.install.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0006.[deploy plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0007.[site plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven.site.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0008.[projectinfo plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven.projectinfo.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0009.[source plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven.source.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0010.[javadoc plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.javadoc.plugin.version}</version>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0011.[assembly plugin][plugin] -->
+                <!-- ********************************************************************** -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven.assembly.plugin.version.2.6}</version>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <archive>
+                            <manifest>
+                                <!-- 此处指定main方法入口的class -->
+                                <!--  <mainClass>edu.entry.Start</mainClass> -->
+                                <mainClass>${maven.assembly.plugin.main.class}</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>assembly</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+                <!-- ***** 0100. [war empty][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- web空处理——空目录处理和无web.xml处理 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven.war.plugin.version}</version>
+                    <!-- 解决Cannot detect Web Project version. -->
+                    <!-- Please specify version of Web Project through Maven project property. -->
+                    <configuration>
+                        <!--<version>${project.war.config.version}</version>-->
+                        <includeEmptyDirectories>true</includeEmptyDirectories>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0110. [jetty run web app][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- 说明1：默认端口号为9090（可自行修改） -->
+                <!-- 说明1：默认上下文目录 是项目的artifactId（也可自行修改） -->
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${maven.jetty.plugin.version}</version>
+                    <configuration>
+                        <webApp>
+                            <contextPath>/${project.artifactId}</contextPath>
+                            <descriptor>${basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
+                        </webApp>
+                        <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+                        <scanIntervalSeconds>1</scanIntervalSeconds>
+                        <httpConnector>
+                            <port>${maven.jetty.plugin.port}</port>
+                        </httpConnector>
+                    </configuration>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+                <!-- ********************************************************************** -->
+                <!-- ***** 0120. [deployprj to tomcat7][plugin] -->
+                <!-- ********************************************************************** -->
+                <!-- 步骤1：配置tomcat以支持远程部署，参看相关步骤； -->
+                <!-- 步骤2：将tomcat远程部署的账密配置到maven，参看相关步骤； -->
+                <!-- 步骤3：本插件的server标记中配置tomcat服务器标识； -->
+                <!-- 步骤4：本插件的url标记中配置tomcat服务器的部署url； -->
+                <!-- 说明：本示例url为114.115.219.244等只是参考，要改为真实url； -->
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>${maven.tomcat7.plugin.version}</version>
+                    <configuration>
+                        <path>/${project.artifactId}</path>
+                        <!-- <uriEncoding>UTF-8</uriEncoding> -->
+                        <charset>utf8</charset>
+                        <update>true</update>
+                        <server>${maven.tomcat7.plugin.server}</server>
+                        <url>${maven.tomcat7.plugin.url}</url>
+                    </configuration>
+                </plugin>
+                <!-- ********************************************************************** -->
+
+
+
+            </plugins>
+        </pluginManagement>
+
+    </build>
+
+    <!-- 9. 发布管理-->
+    <distributionManagement>
+        <!-- 9A. 正常发布仓库-->
+        <repository>
+            <id>${internal.repo.id}</id>
+            <url>${internal.repo.release.url}</url>
+        </repository>
+        <!-- 9B. 快照发布仓库-->
+        <snapshotRepository>
+            <id>${internal.repo.id}</id>
+            <url>${internal.repo.snapshot.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+
+</project>

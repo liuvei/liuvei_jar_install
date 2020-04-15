@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <parent>
+        <groupId>com.liuvei.pom</groupId>
+        <artifactId>liuvei-pom-app</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.liuvei.third</groupId>
+    <artifactId>liuvei-third-jackson</artifactId>
+    <version>1.0.0</version>
+
+    <dependencies>
+        <!-- ********************************************************************** -->
+        <!-- ***** 1051. [jackson][jar] -->
+        <!-- ********************************************************************** -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!-- ********************************************************************** -->
+        <!-- ********************************************************************** -->
+        <!-- ***** 3000. [third liuvei common][jar] -->
+        <!-- ********************************************************************** -->
+        <!-- 说明1：本jar包是第三方包，需要先以命令行形式安装在本地仓库； -->
+        <!-- 说明2：如使私服，且已在私服部署本包，则直接依赖即可。 -->
+        <!--
+            mvn install:install-file -Dfile=D:\liuvei-common-1.0.0.jar -DgroupId=com.liuvei.common -DartifactId=liuvei-common -Dversion=1.0.0 -Dpackaging=jar -DgeneratePom=true
+        -->
+
+        <dependency>
+            <groupId>com.liuvei.common</groupId>
+            <artifactId>liuvei-common</artifactId>
+            <version>${liuvei.common.version}</version>
+        </dependency>
+
+        <!-- ********************************************************************** -->
+
+
+
+    </dependencies>
+</project>
